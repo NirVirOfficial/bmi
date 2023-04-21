@@ -1,0 +1,96 @@
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BMI Calculator</title>
+	<style>
+		body {
+			background-color: #00000;
+			color: #ff00cc;
+			font-family: sans-serif;
+			text-align: center;
+			padding-top: 50px;
+		}
+		h1 {
+			color: #ff00cc;
+			font-size: 48px;
+			margin: 0;
+		}
+		label, select {
+			color: #00ffff;
+			font-size: 24px;
+		}
+		input[type="text"], select {
+			background-color: #000;
+			border: 2px solid #fff;
+			color: #fff;
+			font-size: 24px;
+			padding: 10px;
+			margin-bottom: 20px;
+			width: 200px;
+		}
+		button {
+			background-color: #ff00cc;
+			border: none;
+			color: #000;
+			font-size: 24px;
+			padding: 10px 20px;
+			margin-top: 20px;
+			cursor: pointer;
+		}
+		button:hover {
+			background-color: #ff00cc;
+		}
+		#result {
+			font-size: 36px;
+			margin-top: 50px;
+		}
+	</style>
+	<script>
+		function calculateBMI() {
+			var heightInput = document.getElementById("heightInput").value;
+			var weightInput = document.getElementById("weightInput").value;
+			var heightUnit = document.getElementById("heightUnit").value;
+			var weightUnit = document.getElementById("weightUnit").value;
+			var height, weight;
+
+			if (heightUnit == "cm") {
+				height = parseFloat(heightInput) / 100; // Convert cm to m
+			} else {
+				var feetInch = heightInput.split("'"); // Split height input into feet and inches
+				height = parseFloat(feetInch[0]) * 0.3048 + parseFloat(feetInch[1]) * 0.0254; // Convert feet and inches to m
+			}
+
+			if (weightUnit == "kg") {
+				weight = parseFloat(weightInput);
+			} else {
+				weight = parseFloat(weightInput) * 0.453592; // Convert pounds to kg
+			}
+
+			var bmi = weight / (height * height); // Calculate BMI
+			document.getElementById("result").innerHTML = "Your BMI is: " + bmi.toFixed(2); // Display BMI
+		}
+	</script>
+</head>
+<body>
+	<h1>BMI Calculator</h1>
+	<label for="heightInput">Enter your height:</label>
+	<br>
+	<input type="text" id="heightInput">
+	<select id="heightUnit">
+		<option value="cm">cm</option>
+		<option value="ft'in'">ft'in'</option>
+	</select>
+	<br>
+	<label for="weightInput">Enter your weight:</label>
+	<br>
+	<input type="text" id="weightInput">
+	<select id="weightUnit">
+		<option value="kg">kg</option>
+		<option value="pounds">pounds</option>
+	</select>
+	<br>
+	<button onclick="calculateBMI()">Calculate</button>
+	<p id="result"></p>
+</body>
+</html>
